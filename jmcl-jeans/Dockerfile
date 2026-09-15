@@ -53,8 +53,8 @@ COPY package.json ./package.json
 # Install this project's actual dependencies (adds laravel/sanctum,
 # intervention/image, etc. on top of the base skeleton's packages)
 RUN composer config -g policy.advisories.block false \
-    && composer install --no-dev --optimize-autoloader --no-interaction
-    
+    && rm -f composer.lock \
+    && composer install --no-dev --optimize-autoloader --no-interaction    
 # Bring in the compiled CSS/JS from Stage 1
 COPY --from=assets /app/public/build ./public/build
 
