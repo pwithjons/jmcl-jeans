@@ -18,8 +18,8 @@ RUN npm run build
 
 # ---------- Stage 2: a fresh Laravel 11 skeleton (artisan, public/index.php, base config/*) ----------
 FROM composer:2 AS base
-RUN composer create-project laravel/laravel:^11.0 /base --prefer-dist --no-interaction --no-scripts
-
+RUN composer config -g policy.advisories.block false \
+    && composer create-project laravel/laravel:^11.0 /base --prefer-dist --no-interaction --no-scripts
 # ---------- Stage 3: final PHP application image ----------
 FROM php:8.2-cli
 
@@ -52,8 +52,9 @@ COPY package.json ./package.json
 
 # Install this project's actual dependencies (adds laravel/sanctum,
 # intervention/image, etc. on top of the base skeleton's packages)
-RUN composer install --no-dev --optimize-autoloader --no-interaction
-
+RUN composer config -g policy.advisories.block false \
+    && composer install --no-dev --optimize-autoloader --no-interaction
+    
 # Bring in the compiled CSS/JS from Stage 1
 COPY --from=assets /app/public/build ./public/build
 
