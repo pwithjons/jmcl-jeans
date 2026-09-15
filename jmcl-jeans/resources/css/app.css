@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    body {
+        @apply font-sans text-charcoal-900 antialiased;
+    }
+    h1, h2, h3, h4 {
+        @apply font-display;
+    }
+}
+
+@layer components {
+    .btn-primary {
+        @apply inline-flex items-center justify-center px-6 py-3 bg-charcoal-900 text-white text-sm font-semibold tracking-wide uppercase rounded-md hover:bg-charcoal-800 transition-colors duration-200;
+    }
+    .btn-secondary {
+        @apply inline-flex items-center justify-center px-6 py-3 border border-charcoal-900 text-charcoal-900 text-sm font-semibold tracking-wide uppercase rounded-md hover:bg-charcoal-900 hover:text-white transition-colors duration-200;
+    }
+    .product-card {
+        @apply group relative bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-300;
+    }
+    .section-heading {
+        @apply text-3xl md:text-4xl font-display font-bold text-charcoal-900 tracking-tight;
+    }
+    .input-field {
+        @apply w-full rounded-md border-charcoal-300 focus:border-denim-500 focus:ring-denim-500 text-sm;
+    }
+}
