@@ -25,8 +25,8 @@ FROM php:8.2-cli
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
         git unzip libzip-dev libpng-dev libjpeg62-turbo-dev libfreetype6-dev \
-        libonig-dev sqlite3 libsqlite3-dev libpq-dev \
-    && docker-php-ext-configure gd --with-freetype --with-jpeg \
+        libwebp-dev libonig-dev sqlite3 libsqlite3-dev libpq-dev \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp \
     && docker-php-ext-install pdo pdo_sqlite pdo_mysql pdo_pgsql mbstring bcmath gd zip \
     && rm -rf /var/lib/apt/lists/*
 
