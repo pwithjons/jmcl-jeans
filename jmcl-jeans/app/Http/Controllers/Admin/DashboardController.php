@@ -28,11 +28,11 @@ class DashboardController extends Controller
 
         $recentOrders = Order::with('user')->orderByDesc('created_at')->limit(5)->get();
 
-        $lowStockProducts = Product::withSum('variations', 'stock_quantity')
-            ->having('variations_sum_stock_quantity', '<=', 5)
-            ->having('variations_sum_stock_quantity', '>', 0)
-            ->limit(5)
-            ->get();
+$lowStockProducts = Product::withSum('variations', 'stock_quantity')
+    ->get()
+    ->filter(fn ($product) => $product->variations_sum_stock_quantity > 0
+        && $product->variations_sum_stock_quantity <= 5)
+    ->take(5);
 
         return view('admin.dashboard', [
             'admin' => auth('admin')->user(),
